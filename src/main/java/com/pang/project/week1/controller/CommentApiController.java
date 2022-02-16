@@ -10,6 +10,8 @@ import com.pang.project.week1.service.CommentService;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,30 +34,33 @@ public class CommentApiController {
 
     @PostMapping("/api/comments/{id}")
     public Long createComment(@PathVariable Long id, @RequestBody CommentSaveRequestDto requestDto){
-        Board board = boardRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("해당 게시글 없음")
-        );
-        Comment comment = new Comment(requestDto);
-        comment.addBoard(board);
-        commentRepository.save(comment);
+        commentService.createComment(id, requestDto);
         return id;
     }
 
     @GetMapping("/api/comments/{boardId}")
     public List<Comment> getAll(@PathVariable Long boardId){
 //        Board board = boardRepository.findById(boardId)
-        return commentRepository.findAllDesc(boardId);
+        return commentService.getAll(boardId);
     }
 
     @DeleteMapping("api/comments/{commentId}")
     public void delete(@PathVariable Long commentId){
-        commentRepository.deleteById(commentId);
+        commentService.delete(commentId);
     }
 
+//    @PatchMapping("api/comments/{commentId}")
+//    public void update(@PathVariable Long commentId, @RequestBody CommentUpdateDto dto){
+//        commentService.update(commentId, dto);
+//    }
+
     @PatchMapping("api/comments/{commentId}")
-    public void update(@PathVariable Long commentId, @RequestBody CommentUpdateDto dto){
+    public ResponseEntity<String> update(@PathVariable Long commentId, @RequestBody CommentUpdateDto dto){
         commentService.update(commentId, dto);
+        return HttpStatus
     }
 
 
 }
+
+
