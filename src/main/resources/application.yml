@@ -19,6 +19,8 @@ spring:
 
   mustache:
     suffix: .html
+    prefix: classpath:/templates/
+
 
 logging:
   level:
