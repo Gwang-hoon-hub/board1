@@ -55,9 +55,8 @@ public class CommentApiController {
 //    }
 
     @PatchMapping("api/comments/{commentId}")
-    public ResponseEntity<String> update(@PathVariable Long commentId, @RequestBody CommentUpdateDto dto){
+    public void update(@PathVariable Long commentId, @RequestBody CommentUpdateDto dto){
         commentService.update(commentId, dto);
-        return HttpStatus
     }
 
 

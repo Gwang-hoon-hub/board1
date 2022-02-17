@@ -5,17 +5,20 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     # DB Source
-    url: jdbc:mysql://localhost:3306/sparta_blog?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://spring-db.cyvpzdbrywmx.ap-northeast-2.rds.amazonaws.com:3306/blog
     # DB username
-    username: root
+    username: admin
     # DB password
     password: rhkdgns92
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
+
+  mustache:
+    suffix: .html
 
 logging:
   level:

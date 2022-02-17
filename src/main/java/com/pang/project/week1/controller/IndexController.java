@@ -31,5 +31,4 @@ public class IndexController {
         model.addAttribute("board", dto);
         return "board-update";
     }
-
 }
